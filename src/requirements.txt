@@ -1,7 +1,7 @@
 black~=22.0
 flake8>=3.7.9, <5.0
-ipython>=7.31.1, <8.0; python_version < '3.8'
-ipython~=8.10; python_version >= '3.8'
+ipython>=7.31.1, <8.0; python_version < '3.10.10'
+ipython~=8.10; python_version >= '3.10.10'
 isort~=5.0
 jupyter~=1.0
 jupyterlab_server>=2.11.1, <2.16.0
@@ -12,3 +12,9 @@ nbstripout~=0.4
 pytest-cov~=3.0
 pytest-mock>=1.7.1, <2.0
 pytest~=7.2
+requests
+aiohttp
+s3fs
+kedro[pandas.CSVDataSet]==0.18.7
+kedro-viz~=6.0.1
+scikit-learn~=1.0
