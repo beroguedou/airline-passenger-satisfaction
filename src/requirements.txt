@@ -15,6 +15,7 @@ pytest~=7.2
 requests
 aiohttp
 s3fs
-kedro[pandas.CSVDataSet]==0.18.7
+kedro[pandas.CSVDataSet, pandas.ParquetDataSet]==0.18.7
 kedro-viz~=6.0.1
 scikit-learn~=1.0
+pandas
