@@ -46,6 +46,7 @@ def encode_categorical_features(
 ):
     for feature in mapping_unique_values:
         unique_values = mapping_unique_values[feature]
+        # if feature == "satisfaction": print("Yobaaaaanatex =====> ", unique_values)
         dataframe[feature] = dataframe[feature].apply(lambda x: unique_values.index(x))
     return dataframe
 
