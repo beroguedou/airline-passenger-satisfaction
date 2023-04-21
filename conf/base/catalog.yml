@@ -1,9 +1,38 @@
-satisfaction:
+satisfaction_questions:
   type: pandas.ParquetDataSet
-  filepath: s3://mlops-bucket-190747452043/raw/airline-passenger-satisfaction/dataset.parquet
+  filepath: s3://mlops-bucket-190747452043/raw/airline-passenger-satisfaction/data/satisfaction_questions.parquet
+  credentials: dev_s3
+
+satisfaction_labels:
+  type: pandas.ParquetDataSet
+  filepath: s3://mlops-bucket-190747452043/raw/airline-passenger-satisfaction/labels/satisfaction_labels.parquet
   credentials: dev_s3
 
 intermediate:
   type: pandas.ParquetDataSet
   filepath: s3://mlops-bucket-190747452043/intermediate/airline-passenger-satisfaction/anonymised_satisfaction.parquet
+  credentials: dev_s3
+
+
+primary:
+  type: MemoryDataSet
+  #type: pandas.ParquetDataSet
+#  filepath: s3://mlops-bucket-190747452043/primary/airline-passenger-satisfaction/primary_satisfaction.parquet
+#  credentials: dev_s3
+
+names_mapping:
+  type: pickle.PickleDataSet
+  filepath: s3://mlops-bucket-190747452043/intermediate/airline-passenger-satisfaction/names_mapping.pkl
+  credentials: dev_s3
+
+trained_uncalibrated_model:
+  type: pickle.PickleDataSet
+  filepath: s3://mlops-bucket-190747452043/models/airline-passenger-satisfaction/uncalibrated/trained_uncalibrated_ebm_model.pkl
+  #versioned: true
+  credentials: dev_s3
+
+trained_calibrated_model:
+  type: pickle.PickleDataSet
+  filepath: s3://mlops-bucket-190747452043/models/airline-passenger-satisfaction/calibrated/trained_calibrated_ebm_model.pkl
+  #versioned: true
   credentials: dev_s3

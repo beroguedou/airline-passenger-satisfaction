@@ -1,5 +1,30 @@
-# This is a boilerplate parameters config generated for pipeline 'data_processing'
-# using Kedro 0.18.7.
-#
-# Documentation for this file format can be found in "Parameters"
-# Link: https://docs.kedro.org/en/0.18.7/kedro_project_setup/configuration.html#parameters
+categorical_features:
+  - gender
+  - customer_type
+  - type_of_travel
+  - class
+  - inflight_wifi_service
+  - departure_arrival_time_convenient
+  - ease_of_online_booking
+  - gate_location
+  - food_and_drink
+  - online_boarding
+  - seat_comfort
+  - inflight_entertainment
+  - on_board_service
+  - leg_room_service
+  - baggage_handling
+  - checkin_service
+  - inflight_service
+  - cleanliness
+numerical_features:
+  - age
+  - flight_distance
+  - seat_comfort
+  - departure_delay_in_minutes
+  - arrival_delay_in_minutes
+label: satisfaction
+columns_to_delete:
+  - id
+  - "Unnamed: 0"
+merged_column: id
