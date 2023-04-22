@@ -48,7 +48,11 @@ repos:
     hooks:
     -   id: mypy
         args: [--allow-redefinition, --ignore-missing-imports]
-        exclude: ^docs/
+        exclude: |
+            (?x)(
+              ^docs/|
+              ^tests
+            )
         additional_dependencies:
             - types-cachetools
             - types-filelock
