@@ -52,6 +52,7 @@ def compute_unique_values(
 def encode_categorical_features(
     dataframe: pd.DataFrame, mapping_unique_values: Dict[str, List[str]]
 ) -> pd.DataFrame:
+    dataframe = dataframe.copy()
     for feature in mapping_unique_values:
         unique_values = mapping_unique_values[feature]
         dataframe[feature] = dataframe[feature].apply(lambda x: unique_values.index(x))
@@ -73,7 +74,7 @@ def split_dataset(
         dataframe, test_size=0.4, random_state=random_state
     )
     X_calibration, X_test = train_test_split(
-        X_remain, test_size=0.33, random_state=random_state
+        X_remain, test_size=0.5, random_state=random_state
     )
     logger.info(
         "They are {} samples, we will use {} for training {} for validation and {} for calibration.".format(
