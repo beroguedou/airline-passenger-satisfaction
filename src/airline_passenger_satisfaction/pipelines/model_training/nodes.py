@@ -5,13 +5,19 @@ from sklearn.calibration import CalibratedClassifierCV
 from sklearn.metrics import accuracy_score, f1_score, roc_auc_score
 
 
-def train_model(train_dataset: pd.DataFrame, train_label: pd.Series, random_state: int):
+def train_model(
+    train_dataset: pd.DataFrame, train_label: pd.Series, random_state: int
+) -> ExplainableBoostingClassifier:
     ebm_model = ExplainableBoostingClassifier(random_state=random_state)
     ebm_model.fit(train_dataset, train_label)
     return ebm_model
 
 
-def calibrate_model(calibration_data, calibration_label, trained_model):
+def calibrate_model(
+    calibration_data: pd.DataFrame,
+    calibration_label: pd.Series,
+    trained_model: ExplainableBoostingClassifier,
+) -> CalibratedClassifierCV:
     calibrated_model = CalibratedClassifierCV(
         trained_model, cv="prefit", method="isotonic"
     )

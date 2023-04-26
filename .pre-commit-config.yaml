@@ -51,7 +51,10 @@ repos:
         exclude: |
             (?x)(
               ^docs/|
-              ^tests
+              ^tests/|
+              __main__.py$|
+              test_run.py$|
+              pipeline.py$
             )
         additional_dependencies:
             - types-cachetools

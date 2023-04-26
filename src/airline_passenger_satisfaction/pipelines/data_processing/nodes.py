@@ -1,5 +1,5 @@
 import logging
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Union
 
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -36,7 +36,7 @@ def rename_columns_in_dataframe(
 
 def compute_unique_values(
     dataframe: pd.DataFrame, catagerocial_values: List[str], label: str
-) -> Dict:
+) -> Dict[str, List[Union[str, int]]]:
     mapping_unique_values = {}
     # Allows label to be treated like other categorical
     catagerocial_values.append(label)
@@ -51,7 +51,7 @@ def compute_unique_values(
 
 def encode_categorical_features(
     dataframe: pd.DataFrame, mapping_unique_values: Dict[str, List[str]]
-):
+) -> pd.DataFrame:
     for feature in mapping_unique_values:
         unique_values = mapping_unique_values[feature]
         dataframe[feature] = dataframe[feature].apply(lambda x: unique_values.index(x))
