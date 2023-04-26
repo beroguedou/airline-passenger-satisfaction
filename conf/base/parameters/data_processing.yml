@@ -2,7 +2,7 @@ categorical_features:
   - gender
   - customer_type
   - type_of_travel
-  - class
+  - flight_class
   - inflight_wifi_service
   - departure_arrival_time_convenient
   - ease_of_online_booking

@@ -20,7 +20,17 @@ primary:
 #  filepath: s3://mlops-bucket-190747452043/primary/airline-passenger-satisfaction/primary_satisfaction.parquet
 #  credentials: dev_s3
 
+mapping_unique_values:
+  type: pickle.PickleDataSet
+  filepath: s3://mlops-bucket-190747452043/intermediate/airline-passenger-satisfaction/mapping_unique_values.pkl
+  credentials: dev_s3
+
 names_mapping:
+  type: pickle.PickleDataSet
+  filepath: s3://mlops-bucket-190747452043/intermediate/airline-passenger-satisfaction/names_mapping.pkl
+  credentials: dev_s3
+
+data_columns_order:
   type: pickle.PickleDataSet
   filepath: s3://mlops-bucket-190747452043/intermediate/airline-passenger-satisfaction/names_mapping.pkl
   credentials: dev_s3

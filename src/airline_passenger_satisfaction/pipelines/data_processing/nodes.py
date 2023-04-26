@@ -1,7 +1,10 @@
+import logging
 from typing import Dict, List, Tuple
 
 import pandas as pd
 from sklearn.model_selection import train_test_split
+
+logger = logging.getLogger(__name__)
 
 
 def merge_datasets(
@@ -23,9 +26,10 @@ def rename_columns_in_dataframe(
     columns_names_mapping = {}
     old_columns = dataframe.columns
     for col in old_columns:
-        columns_names_mapping[col] = (
-            col.lower().replace("/", "_").replace(" ", "_").replace("-", "_")
-        )
+        new_col = col.lower().replace("/", "_").replace(" ", "_").replace("-", "_")
+        if new_col == "class":
+            new_col = "flight_class"
+        columns_names_mapping[col] = new_col
     dataframe = dataframe.rename(columns=columns_names_mapping)
     return dataframe, columns_names_mapping
 
@@ -37,7 +41,11 @@ def compute_unique_values(
     # Allows label to be treated like other categorical
     catagerocial_values.append(label)
     for col in catagerocial_values:
-        mapping_unique_values[col] = dataframe[col].unique().tolist()
+        unique_values = dataframe[col].unique().tolist()
+        mapping_unique_values[col] = unique_values
+        logger.info(
+            "The unique value list for {} is ==> {}".format(col, str(unique_values))
+        )
     return mapping_unique_values
 
 
@@ -46,19 +54,31 @@ def encode_categorical_features(
 ):
     for feature in mapping_unique_values:
         unique_values = mapping_unique_values[feature]
-        # if feature == "satisfaction": print("Yobaaaaanatex =====> ", unique_values)
         dataframe[feature] = dataframe[feature].apply(lambda x: unique_values.index(x))
     return dataframe
+
+
+def get_columns_order(dataframe: pd.DataFrame, label: str) -> List[str]:
+    columns = dataframe.columns.tolist()
+    columns.remove(label)
+    logger.info("The columns order is: {} ".format(" => ".join(columns)))
+    return columns
 
 
 def split_dataset(
     dataframe: pd.DataFrame, random_state: int
 ) -> Tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    """Node for spliting the initial dataset in train, test and calibration datasets."""
     X_train, X_remain = train_test_split(
         dataframe, test_size=0.4, random_state=random_state
     )
     X_calibration, X_test = train_test_split(
         X_remain, test_size=0.33, random_state=random_state
+    )
+    logger.info(
+        "They are {} samples, we will use {} for training {} for validation and {} for calibration.".format(
+            len(dataframe), len(X_train), len(X_test), len(X_calibration)
+        )
     )
     return X_train, X_test, X_calibration
 

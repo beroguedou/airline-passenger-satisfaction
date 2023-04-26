@@ -1,14 +1,10 @@
-"""
-This is a boilerplate pipeline 'data_processing'
-generated using Kedro 0.18.7
-"""
-
 from kedro.pipeline import Pipeline, node, pipeline
 
 from .nodes import (
     compute_unique_values,
     delete_columns,
     encode_categorical_features,
+    get_columns_order,
     merge_datasets,
     rename_columns_in_dataframe,
     separate_label,
@@ -52,6 +48,12 @@ def create_pipeline(**kwargs) -> Pipeline:
                 inputs=["primary", "mapping_unique_values"],
                 outputs="encoded_features",
                 name="encode-categorical-features-and-labels",
+            ),
+            node(
+                func=get_columns_order,
+                inputs=["encoded_features", "params:label"],
+                outputs="data_columns_order",
+                name="save-columns-order",
             ),
             node(
                 func=split_dataset,
