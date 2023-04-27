@@ -8,31 +8,85 @@ satisfaction_labels:
   filepath: s3://mlops-bucket-190747452043/raw/airline-passenger-satisfaction/labels/satisfaction_labels.parquet
   credentials: dev_s3
 
-intermediate:
+merged_satisfaction:
   type: pandas.ParquetDataSet
-  filepath: s3://mlops-bucket-190747452043/intermediate/airline-passenger-satisfaction/anonymised_satisfaction.parquet
+  filepath: s3://mlops-bucket-190747452043/intermediate/airline-passenger-satisfaction/merged_satisfaction.parquet
   credentials: dev_s3
 
+cleaned_columns_satisfaction:
+  type: pandas.ParquetDataSet
+  filepath: s3://mlops-bucket-190747452043/intermediate/airline-passenger-satisfaction/cleaned_columns_satisfaction.parquet
+  credentials: dev_s3
 
-primary:
-  type: MemoryDataSet
-  #type: pandas.ParquetDataSet
-#  filepath: s3://mlops-bucket-190747452043/primary/airline-passenger-satisfaction/primary_satisfaction.parquet
-#  credentials: dev_s3
-
-mapping_unique_values:
-  type: pickle.PickleDataSet
-  filepath: s3://mlops-bucket-190747452043/intermediate/airline-passenger-satisfaction/mapping_unique_values.pkl
+renamed_columns_satisfaction:
+  type: pandas.ParquetDataSet
+  filepath: s3://mlops-bucket-190747452043/primary/airline-passenger-satisfaction/cleaned_columns_satisfaction.parquet
   credentials: dev_s3
 
 names_mapping:
-  type: pickle.PickleDataSet
-  filepath: s3://mlops-bucket-190747452043/intermediate/airline-passenger-satisfaction/names_mapping.pkl
+  type: json.JSONDataSet
+  filepath: s3://mlops-bucket-190747452043/primary/airline-passenger-satisfaction/names_mapping.json
+  credentials: dev_s3
+
+mapping_unique_values:
+  type: json.JSONDataSet
+  filepath: s3://mlops-bucket-190747452043/feature/airline-passenger-satisfaction/mapping_unique_values.json
+  credentials: dev_s3
+
+
+encoded_features:
+  type: pandas.ParquetDataSet
+  filepath: s3://mlops-bucket-190747452043/feature/airline-passenger-satisfaction/encoded_features.parquet
   credentials: dev_s3
 
 data_columns_order:
   type: pickle.PickleDataSet
-  filepath: s3://mlops-bucket-190747452043/intermediate/airline-passenger-satisfaction/names_mapping.pkl
+  filepath: s3://mlops-bucket-190747452043/feature/airline-passenger-satisfaction/data_columns_order.pkl
+  credentials: dev_s3
+
+train_dataset:
+  type: pandas.ParquetDataSet
+  filepath: s3://mlops-bucket-190747452043/model_input/airline-passenger-satisfaction/train_dataset.parquet
+  credentials: dev_s3
+
+test_dataset:
+  type: pandas.ParquetDataSet
+  filepath: s3://mlops-bucket-190747452043/model_input/airline-passenger-satisfaction/test_dataset.parquet
+  credentials: dev_s3
+
+calibration_dataset:
+  type: pandas.ParquetDataSet
+  filepath: s3://mlops-bucket-190747452043/model_input/airline-passenger-satisfaction/calibration_dataset.parquet
+  credentials: dev_s3
+
+train_data:
+  type: pandas.ParquetDataSet
+  filepath: s3://mlops-bucket-190747452043/model_input/airline-passenger-satisfaction/train_data.parquet
+  credentials: dev_s3
+
+train_label:
+  type: pandas.CSVDataSet
+  filepath: s3://mlops-bucket-190747452043/model_input/airline-passenger-satisfaction/train_label.csv
+  credentials: dev_s3
+
+test_data:
+  type: pandas.ParquetDataSet
+  filepath: s3://mlops-bucket-190747452043/model_input/airline-passenger-satisfaction/test_data.parquet
+  credentials: dev_s3
+
+test_label:
+  type: pandas.CSVDataSet
+  filepath: s3://mlops-bucket-190747452043/model_input/airline-passenger-satisfaction/test_label.csv
+  credentials: dev_s3
+
+calibration_data:
+  type: pandas.ParquetDataSet
+  filepath: s3://mlops-bucket-190747452043/model_input/airline-passenger-satisfaction/calibration_data.parquet
+  credentials: dev_s3
+
+calibration_label:
+  type: pandas.CSVDataSet
+  filepath: s3://mlops-bucket-190747452043/model_input/airline-passenger-satisfaction/calibration_label.csv
   credentials: dev_s3
 
 trained_uncalibrated_model:
@@ -45,4 +99,9 @@ trained_calibrated_model:
   type: pickle.PickleDataSet
   filepath: s3://mlops-bucket-190747452043/models/airline-passenger-satisfaction/calibrated/trained_calibrated_ebm_model.pkl
   #versioned: true
+  credentials: dev_s3
+
+score:
+  type: json.JSONDataSet
+  filepath: s3://mlops-bucket-190747452043/reporting/airline-passenger-satisfaction/score.json
   credentials: dev_s3

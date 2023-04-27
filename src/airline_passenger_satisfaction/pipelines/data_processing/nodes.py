@@ -11,6 +11,7 @@ def merge_datasets(
     questions_dataset: pd.DataFrame, labels_datasets: pd.DataFrame, merged_column: str
 ) -> pd.DataFrame:
     merged_datasets = pd.merge(questions_dataset, labels_datasets, on=merged_column)
+    logger.info("Succesfully merged features and labels for the raw datasets.")
     return merged_datasets
 
 
@@ -31,6 +32,7 @@ def rename_columns_in_dataframe(
             new_col = "flight_class"
         columns_names_mapping[col] = new_col
     dataframe = dataframe.rename(columns=columns_names_mapping)
+    logger.info("Succesfully renamed the features present in the dataset ...")
     return dataframe, columns_names_mapping
 
 
