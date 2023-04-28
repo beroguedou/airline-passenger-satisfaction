@@ -27,10 +27,8 @@ def predict_satisfaction() -> wrappers.Response:
         mapping_label,
         threshold,
     )
-    ## print("Ediiiiééé ======> ", type(jsonify(prediction)))
-
     return jsonify(prediction)
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5001, host="0.0.0.0")

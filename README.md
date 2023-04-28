@@ -150,3 +150,5 @@ https://www.kaggle.com/datasets/teejmahal20/airline-passenger-satisfaction
     "departure_delay_in_minutes": 25,
     "arrival_delay_in_minutes": 18.0
 }
+
+docker run -d -p 5001:5001 airline-passenger-satisfaction
