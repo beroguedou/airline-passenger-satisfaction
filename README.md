@@ -151,4 +151,7 @@ https://www.kaggle.com/datasets/teejmahal20/airline-passenger-satisfaction
     "arrival_delay_in_minutes": 18.0
 }
 
+
+kedro docker build --docker-args "--no-cache --build-arg AWS_ACCESS_KEY=$AWS_ACCESS_KEY --build-arg AWS_SECRET_KEY_ID=$AWS_SECRET_KEY_ID"
+
 docker run -d -p 5001:5001 airline-passenger-satisfaction

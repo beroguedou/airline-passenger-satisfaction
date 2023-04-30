@@ -7,10 +7,13 @@ Dockerfile
 
 # ignore potentially sensitive credentials files
 #conf/**/*credentials*
+# toto
+#!conf/base/*credentials*
 
 # ignore all local configuration
-#conf/local
+conf/local
 !conf/local/.gitkeep
+
 
 # ignore everything in the following folders
 data/**/*.csv

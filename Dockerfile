@@ -16,6 +16,12 @@ USER kedro_docker
 
 FROM runtime-environment
 
+ARG AWS_ACCESS_KEY
+ARG AWS_SECRET_KEY_ID
+
+ENV AWS_ACCESS_KEY=$AWS_ACCESS_KEY
+ENV AWS_SECRET_KEY_ID=$AWS_SECRET_KEY_ID
+
 # copy the whole project except what is in .dockerignore
 ARG KEDRO_UID=999
 ARG KEDRO_GID=0
